@@ -1,0 +1,12 @@
+Nombre: Jesus R
+Correo: jesusalej23@gmail.com
+Dirección: Gran Colombia
+----------------------------------
+Nombre: Daniel
+Correo: danieluwu12@gmail.com
+Dirección: Peru
+----------------------------------
+Nombre: Patricio
+Correo: patricioale11@gmail.com
+Dirección: Machala
+----------------------------------
