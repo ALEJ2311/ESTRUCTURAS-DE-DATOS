@@ -26,16 +26,16 @@ public class Ejercicio1 {
         }
         System.out.println("Arreglo");
         presentarArreglo(arreglo1);
-        
+
         System.out.println("Arreglo ordenado por Burbuja");
         ordenarBurbuja(arreglo1);
         presentarArreglo(arreglo1);
-        
+
         System.out.print("Ingrese el valor que desea eliminar: ");
         int valor = tcl.nextInt();
         eliminarValor(arreglo1, valor);
         presentarArreglo(arreglo1);
-        
+
         System.out.print("Ingrese el valor que desea reemplazar: ");
         int valorV = tcl.nextInt();
         System.out.print("Ingrese el nuevo valor: ");
