@@ -17,9 +17,9 @@ public class Parte2 {
         
          for (int i = 0; i < movies.length - 1; i++) {
             for (int j = 0; j < movies.length - 1 - i; j++) {
-                // Comparar dos películas
+                
                 if (movies[j].compareToIgnoreCase(movies[j + 1]) > 0) {
-                    // Intercambiar si están en el orden incorrecto
+                    
                     String temp = movies[j];
                     movies[j] = movies[j + 1];
                     movies[j + 1] = temp;
@@ -27,7 +27,7 @@ public class Parte2 {
             }
         }
 
-        // Mostrar las películas ordenadas
+        
         System.out.println("Películas favoritas ordenadas alfabéticamente:");
         for (String movie : movies) {
             System.out.println(movie);
