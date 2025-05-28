@@ -1,0 +1,241 @@
+import java.util.Scanner;
+
+/**
+ *
+ * @author ALEJ2311
+ */
+public class Taller2_Semana5_ArreglosBidimensionales {
+
+    public static void main(String[] args) {
+        int opcion;
+        Scanner tcl = new Scanner(System.in);
+        boolean bandera = true;
+        while (bandera) {
+
+            System.out.println("BIENVENIDO!!");
+            System.out.println("---CALCULADORA DE MATRICES RANDOM---");
+            System.out.println("1. SUMA DE MATRICES");
+            System.out.println("2. RESTA DE MATRICES");
+            System.out.println("3. MULTIPLICACION DE MATRICES");
+            System.out.println("4. TRASPOSICION DE MATRIZ");
+            System.out.println("5. DETERMINANTE MATRIZ");
+            System.out.println("6. INVERSA DE UNA MATRIZ 2x2");
+            System.out.println("7. SALIR");
+            System.out.print("Ingrese un numero: ");
+            opcion = tcl.nextInt();
+
+            switch (opcion) {
+                case 1:
+                    int tamanoS = 0;
+                    System.out.print("Ingrese un numero para una matriz cuadrada: ");
+                    tamanoS = tcl.nextInt();
+                    int matrizS1[][] = new int[tamanoS][tamanoS];
+                    int matrizS2[][] = new int[tamanoS][tamanoS];
+                    crearMatriz(matrizS1);
+                    crearMatriz(matrizS2);
+                    System.out.println("Matriz 1:");
+                    presentarMatriz(matrizS1);
+                    System.out.println("Matriz 2:");
+                    presentarMatriz(matrizS2);
+                    System.out.println("Matriz Suma:");
+                    int matrizRS[][] = sumarMatriz(matrizS1, matrizS2);
+                    presentarMatriz(matrizRS);
+                    break;
+                case 2:
+                    int tamanoR = 0;
+                    System.out.print("Ingrese un numero para una matriz cuadrada: ");
+                    tamanoR = tcl.nextInt();
+                    int matrizR1[][] = new int[tamanoR][tamanoR];
+                    int matrizR2[][] = new int[tamanoR][tamanoR];
+                    crearMatriz(matrizR1);
+                    crearMatriz(matrizR2);
+                    System.out.println("Matriz 1:");
+                    presentarMatriz(matrizR1);
+                    System.out.println("Matriz 2:");
+                    presentarMatriz(matrizR2);
+                    System.out.println("Matriz Resta:");
+                    int matrizRR[][] = restarMatriz(matrizR1, matrizR2);
+                    presentarMatriz(matrizRR);
+                    break;
+                case 3:
+                    int a;
+                    int b;
+                    int c;
+                    int d;
+                    System.out.println("Ingrese dos numeros para una matriz;");
+                    a = tcl.nextInt();
+                    b = tcl.nextInt();
+                    System.out.println("Ingrese dos numeros para una matriz2");
+                    c = tcl.nextInt();
+                    d = tcl.nextInt();
+                    int matrizM1[][] = new int[a][b];
+                    int matrizM2[][] = new int[c][d];
+                    crearMatriz(matrizM1);
+                    crearMatriz(matrizM2);
+                    System.out.println("Matriz 1:");
+                    presentarMatriz(matrizM1);
+                    System.out.println("Matriz 2:");
+                    presentarMatriz(matrizM2);
+                    System.out.println("Matriz Multiplicacion: ");
+                    if (matrizM1[0].length != matrizM2.length) {
+                        System.out.println("Error dimensiones incompatibles");
+                        break;
+                    } else {
+                        int matrizRM[][] = multiplicacionMatrices(matrizM1, matrizM2);
+                        presentarMatriz(matrizRM);
+                    }
+                    break;
+                case 4:
+                    int tamanoT = 0;
+                    System.out.print("Ingrese un numero para una matriz cuadrada: ");
+                    tamanoT = tcl.nextInt();
+                    int matriz1[][] = new int[tamanoT][tamanoT];
+                    crearMatriz(matriz1);
+                    System.out.println("Matriz Original:");
+                    presentarMatriz(matriz1);
+                    System.out.println("Matriz Traspuesta:");
+                    int matrizT[][] = matrizTraspuesta(matriz1);
+                    presentarMatriz(matrizT);
+                    break;
+                case 5:
+                    int tamanoD;
+                    System.out.print("Ingrese 2 o 3 para una matriz cuadrada: ");
+                    tamanoD = tcl.nextInt();
+                    if (tamanoD == 2 || tamanoD == 3) {
+                        int matrizD[][] = new int[tamanoD][tamanoD];
+                        crearMatriz(matrizD);
+                        System.out.println("Matriz Oiriginal: ");
+                        presentarMatriz(matrizD);
+                        int matrizRD;
+                        if (tamanoD == 2) {
+                            matrizRD = determinante2x2(matrizD);
+                        } else {
+                            matrizRD = determinante3x3(matrizD);
+                        }
+                        System.out.println("Determinante de la Matriz: " + matrizRD);
+                    } else {
+                        System.out.println("SOLO SE PERMITE DETERMINANTE DE 2X2 o 3X3");
+                    }
+                    break;
+                case 6:
+                    int tamanoI = 2;
+                    int matrizI[][] = new int[tamanoI][tamanoI];
+                    crearMatriz(matrizI);
+                    int detI = determinante2x2(matrizI);
+                    System.out.println("Matriz Original:");
+                    presentarMatriz(matrizI);
+                    System.out.println("Determinante: " + detI);
+                    double matrizRI[][] = inversa2x2(matrizI, detI);
+                    presentarMatriz(matrizRI);
+
+                    break;
+
+                case 7:
+                    System.out.println("Saliendo....");
+                    bandera = false;
+                    break;
+                default:
+                    System.out.println("No existe esa opcion...!!");
+            }
+
+        }
+    }
+
+    public static void crearMatriz(int arreglo[][]) {
+        for (int i = 0; i < arreglo.length; i++) {
+            for (int j = 0; j < arreglo[0].length; j++) {
+                arreglo[i][j] = (int) (Math.random() * 10);
+            }
+        }
+    }
+
+    public static void presentarMatriz(int arreglo[][]) {
+        for (int i = 0; i < arreglo.length; i++) {
+            for (int j = 0; j < arreglo[0].length; j++) {
+                System.out.print(arreglo[i][j] + "  ");
+            }
+            System.out.println("");
+        }
+    }
+
+    public static int[][] sumarMatriz(int matrizS1[][], int matrizS2[][]) {
+        int matrizSuma[][] = new int[matrizS1.length][matrizS1[0].length];
+        for (int i = 0; i < matrizS1.length; i++) {
+            for (int j = 0; j < matrizS1[0].length; j++) {
+                matrizSuma[i][j] = matrizS1[i][j] + matrizS2[i][j];
+            }
+
+        }
+        return matrizSuma;
+    }
+
+    public static int[][] restarMatriz(int matrizR1[][], int matrizR2[][]) {
+        int matrizResta[][] = new int[matrizR1.length][matrizR1[0].length];
+        for (int i = 0; i < matrizR1.length; i++) {
+            for (int j = 0; j < matrizR1[0].length; j++) {
+                matrizResta[i][j] = matrizR1[i][j] - matrizR2[i][j];
+            }
+
+        }
+        return matrizResta;
+    }
+
+    public static int[][] multiplicacionMatrices(int matrizM1[][], int matrizM2[][]) {
+        int matrizMulti[][] = new int[matrizM1.length][matrizM2[0].length];
+        for (int i = 0; i < matrizM1.length; i++) {
+            for (int j = 0; j < matrizM2[0].length; j++) {
+                matrizMulti[i][j] = 0;
+                for (int k = 0; k < matrizM1[0].length; k++) {
+                    matrizMulti[i][j] += matrizM1[i][k] * matrizM2[k][j];
+                }
+            }
+        }
+        return matrizMulti;
+    }
+
+    public static int[][] matrizTraspuesta(int matriz1[][]) {
+        int traspuesta[][] = new int[matriz1.length][matriz1[0].length];
+        for (int i = 0; i < traspuesta.length; i++) {
+            for (int j = 0; j < traspuesta[0].length; j++) {
+                traspuesta[j][i] = matriz1[i][j];
+            }
+        }
+        return traspuesta;
+    }
+
+    public static int determinante2x2(int[][] A) {
+        return A[0][0] * A[1][1] - A[0][1] * A[1][0];
+    }
+
+    public static int determinante3x3(int[][] A) {
+        int det = A[0][0] * (A[1][1] * A[2][2] - A[1][2] * A[2][1])
+                - A[0][1] * (A[1][0] * A[2][2] - A[1][2] * A[2][0])
+                + A[0][2] * (A[1][0] * A[2][1] - A[1][1] * A[2][0]);
+        return det;
+    }
+
+    public static double[][] inversa2x2(int[][] A, int detI) {
+        if (detI == 0) {
+            System.out.println("La matriz no tiene inversa (determinante = 0)");
+            return null;
+        }
+
+        double[][] inversa = new double[2][2];
+
+        inversa[0][0] = (double) A[1][1] / detI;
+        inversa[0][1] = (double) -A[0][1] / detI;
+        inversa[1][0] = (double) -A[1][0] / detI;
+        inversa[1][1] = (double) A[0][0] / detI;
+
+        return inversa;
+    }
+
+    public static void presentarMatriz(double arreglo[][]) {
+        for (int i = 0; i < arreglo.length; i++) {
+            for (int j = 0; j < arreglo[0].length; j++) {
+                System.out.print(arreglo[i][j] + "  ");
+            }
+            System.out.println("");
+        }
+    }
+}
